@@ -127,7 +127,7 @@ class TestParser:
                 "expected_output": (
                     ": List of vegetables. "
                     "Length must be at least 1. "
-                    "Default: `[\"Carrot\"]`."
+                    'Default: `["Carrot"]`.'
                 ),
             },
             {
@@ -141,7 +141,7 @@ class TestParser:
                 "expected_output": (
                     ": List of vegetables. "
                     "Length must be at most 10. "
-                    "Default: `[\"Carrot\"]`."
+                    'Default: `["Carrot"]`.'
                 ),
             },
             {
@@ -156,7 +156,7 @@ class TestParser:
                 "expected_output": (
                     ": List of vegetables. "
                     "Length must be between 1 and 10 (inclusive). "
-                    "Default: `[\"Carrot\"]`."
+                    'Default: `["Carrot"]`.'
                 ),
             },
             {
@@ -171,7 +171,7 @@ class TestParser:
                 "expected_output": (
                     ": List of vegetables. "
                     "Length must be equal to 5. "
-                    "Default: `[\"Carrot\", \"Mushroom\", \"Cabbage\", \"Broccoli\", \"Leek\"]`."
+                    'Default: `["Carrot", "Mushroom", "Cabbage", "Broccoli", "Leek"]`.'
                 ),
             },
         ]
@@ -208,7 +208,7 @@ class TestParser:
             "- **`vegetables`** *(array)*\n",
             "  - **Items**: Refer to *[#/definitions/veggie](#definitions/veggie)*.\n",
             "## Definitions\n\n",
-            "- <a id=\"definitions/veggie\"></a>**`veggie`** *(object)*\n",
+            '- <a id="definitions/veggie"></a>**`veggie`** *(object)*\n',
             "  - **`veggieName`** *(string)*: The name of the vegetable.\n",
             "  - **`veggieLike`** *(boolean)*: Do I like this vegetable?\n",
             "## Examples\n\n",
@@ -244,7 +244,7 @@ class TestParser:
             "- **`vegetables`** *(array)*\n",
             "  - **Items**: Refer to *[#/definitions/veggie](#definitions/veggie)*.\n",
             "## Definitions\n\n",
-            "- <a id=\"definitions/veggie\"></a>**`veggie`** *(object)*\n",
+            '- <a id="definitions/veggie"></a>**`veggie`** *(object)*\n',
             "  - **`veggieName`** *(string)*: The name of the vegetable.\n",
             "  - **`veggieLike`** *(boolean)*: Do I like this vegetable?\n",
             "## Examples\n\n",

@@ -18,15 +18,14 @@
   "examples": [
     {
       "fruits": ["apple", "orange"],
-      "vegetables": [{"veggieName": "cabbage", "veggieLike": true}]}
+      "vegetables": [{ "veggieName": "cabbage", "veggieLike": true }]
+    }
   ],
   "definitions": {
     "veggie": {
       "type": "object",
-      "required": [ "veggieName", "veggieLike" ],
-      "examples": [
-        {"veggieName": "carrot", "veggieLike": true}
-      ],
+      "required": ["veggieName", "veggieLike"],
+      "examples": [{ "veggieName": "carrot", "veggieLike": true }],
       "properties": {
         "veggieName": {
           "type": "string",

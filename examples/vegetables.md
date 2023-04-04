@@ -1,32 +1,30 @@
 # JSON Schema
 
-*Vegetable preferences*
+_Vegetable preferences_
 
 ## Properties
 
-- **`fruits`** *(array)*
-  - **Items** *(string)*
-- **`vegetables`** *(array)*
-  - **Items**: Refer to *#/definitions/veggie*.
+- **`fruits`** _(array)_
+  - **Items** _(string)_
+- **`vegetables`** _(array)_
+  - **Items**: Refer to _#/definitions/veggie_.
+
 ## Definitions
 
-- **`veggie`** *(object)*
-  - **`veggieName`** *(string)*: The name of the vegetable.
-  - **`veggieLike`** *(boolean)*: Do I like this vegetable?
+- **`veggie`** _(object)_
+  - **`veggieName`** _(string)_: The name of the vegetable.
+  - **`veggieLike`** _(boolean)_: Do I like this vegetable?
+
 ## Examples
 
-  ```json
-  {
-      "fruits": [
-          "apple",
-          "orange"
-      ],
-      "vegetables": [
-          {
-              "veggieName": "cabbage",
-              "veggieLike": true
-          }
-      ]
-  }
-  ```
-
+```json
+{
+  "fruits": ["apple", "orange"],
+  "vegetables": [
+    {
+      "veggieName": "cabbage",
+      "veggieLike": true
+    }
+  ]
+}
+```

@@ -2,20 +2,23 @@
 name = "jsonschema2md2"
 version = "0.6.0"
 description = "Convert JSON Schema to human-readable Markdown documentation"
-authors = ["Ralf Gabriels <ralfg@hotmail.be>", "Matt Graham <matthew.m.graham@gmail.com>"]
+authors = [
+  "Ralf Gabriels <ralfg@hotmail.be>",
+  "Matt Graham <matthew.m.graham@gmail.com>"
+]
 maintainers = ["Stéphane Brunner <stephane.brunner@gmail.com>"]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/sbrunner/jsonschema2md2"
 keywords = ["JSON Schema", "Markdown", "Converter", "Parser", "Documentation"]
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Topic :: Documentation",
-    "Topic :: Software Development :: Documentation",
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Topic :: Documentation",
+  "Topic :: Software Development :: Documentation",
 ]
 
 [tool.poetry.scripts]
@@ -24,7 +27,7 @@ jsonschema2md = 'jsonschema2md2:main'
 [tool.poetry.dependencies]
 python = "^3.6"
 click = ">=7"
-importlib_metadata = { version = "^1", python = "<3.8"}
+importlib_metadata = { version = "^1", python = "<3.8" }
 PyYAML = ">=5.1"
 
 [tool.poetry.dev-dependencies]
