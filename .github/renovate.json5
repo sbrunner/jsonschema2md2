@@ -13,6 +13,11 @@
     schedule: 'after 5pm on the first day of the month',
   },
   baseBranches: ['0.5', '0.6', '0.7'],
+  osvVulnerabilityAlerts: true,
+  vulnerabilityAlerts: {
+    schedule: ['at any time'],
+    automerge: true,
+  },
   regexManagers: [
     {
       fileMatch: ['^ci/dpkg-versions.yaml$'],
