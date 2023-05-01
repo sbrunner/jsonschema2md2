@@ -99,7 +99,6 @@ class Parser:
             else:
                 description_line.append("Cannot contain additional properties.")
         if "$ref" in obj:
-
             description_line.append(f"Refer to *[{obj['$ref']}](#{obj['$ref'][2:]})*.")
         if "default" in obj:
             description_line.append(f"Default: `{json.dumps(obj['default'])}`.")
