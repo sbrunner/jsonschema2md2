@@ -30,7 +30,7 @@ jsonschema2md = 'jsonschema2md:main'
 
 [tool.poetry.dependencies]
 python = "^3.7.2"
-PyYAML = "6.0"
+PyYAML = "6.0.1"
 
 [tool.poetry.group.dev.dependencies]
 prospector = { version = "1.10.2", extras = ["with_bandit", "with_mypy", "with_pyroma"] }
