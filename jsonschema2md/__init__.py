@@ -182,15 +182,11 @@ class Parser:
 
         # Add full line to output
         description_line = " ".join(description_line)
-        optional_format = ""
+        optional_format = optional_format = f", format: {obj['format']}" if "format" in obj else ""
         if name is None:
-            if "format" in obj:
-                optional_format = f", format: {obj['format']}"
             obj_type = f"*{obj['type']}{optional_format}*" if "type" in obj else ""
             name_formatted = ""
         else:
-            if "format" in obj:
-                optional_format = f", format: {obj['format']}"
             required_str = ", required" if required else ""
             obj_type = f" *({obj['type']}{optional_format}{required_str})*" if "type" in obj else ""
             name_formatted = f"**`{name}`**" if name_monospace else f"**{name}**"
