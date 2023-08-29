@@ -182,12 +182,17 @@ class Parser:
 
         # Add full line to output
         description_line = " ".join(description_line)
+        optional_format = ""
         if name is None:
-            obj_type = f"*{obj['type']}*" if "type" in obj else ""
+            if "format" in obj:
+                optional_format = f", format: {obj['format']}"
+            obj_type = f"*{obj['type']}{optional_format}*" if "type" in obj else ""
             name_formatted = ""
         else:
+            if "format" in obj:
+                optional_format = f", format: {obj['format']}"
             required_str = ", required" if required else ""
-            obj_type = f" *({obj['type']}{required_str})*" if "type" in obj else ""
+            obj_type = f" *({obj['type']}{optional_format}{required_str})*" if "type" in obj else ""
             name_formatted = f"**`{name}`**" if name_monospace else f"**{name}**"
         anchor = f"<a id=\"{'/'.join(path)}\"></a>" if path else ""
         output_lines.append(f"{indentation}- {anchor}{name_formatted}{obj_type}{description_line}\n")

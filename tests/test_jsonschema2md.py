@@ -37,6 +37,11 @@ class TestParser:
                         "type": "boolean",
                         "description": "Do I like this vegetable?",
                     },
+                    "expiresAt": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "When does the veggie expires",
+                    },
                 },
             }
         },
@@ -201,6 +206,7 @@ class TestParser:
             '- <a id="definitions/veggie"></a>**`veggie`** *(object)*\n',
             "  - **`veggieName`** *(string, required)*: The name of the vegetable.\n",
             "  - **`veggieLike`** *(boolean, required)*: Do I like this vegetable?\n",
+            "  - **`expiresAt`** *(string, format: date)*: When does the veggie expires.\n",
             "## Examples\n\n",
             "  ```json\n"
             "  {\n"
@@ -236,6 +242,7 @@ class TestParser:
             '- <a id="definitions/veggie"></a>**`veggie`** *(object)*\n',
             "  - **`veggieName`** *(string, required)*: The name of the vegetable.\n",
             "  - **`veggieLike`** *(boolean, required)*: Do I like this vegetable?\n",
+            "  - **`expiresAt`** *(string, format: date)*: When does the veggie expires.\n",
             "## Examples\n\n",
             "  ```yaml\n  fruits:\n  - apple\n  - orange\n  vegetables:\n  -   veggieLike: true\n      veggieName: cabbage\n  ```\n\n",
         ]
