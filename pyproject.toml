@@ -36,7 +36,7 @@ PyYAML = "6.0.1"
 prospector = { version = "1.10.2", extras = ["with_bandit", "with_mypy", "with_pyroma"] }
 pytest = "7.4.0"
 pytest-cov = "4.1.0"
-prospector-profile-duplicated = "0.1.0"
+prospector-profile-duplicated = "0.3.0"
 
 [build-system]
 requires = [
