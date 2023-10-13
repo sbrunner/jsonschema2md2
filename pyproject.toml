@@ -44,6 +44,7 @@ requires = [
     "poetry-dynamic-versioning[plugin]>=0.19.0",
     "poetry-plugin-tweak-dependencies-version",
     "poetry-plugin-drop-python-upper-constraint",
+    "poetry-dynamic-versioning",
 ]
 build-backend = "poetry.core.masonry.api"
 
@@ -52,7 +53,7 @@ enable = true
 vcs = "git"
 pattern = "^(?P<base>\\d+(\\.\\d+)*)"
 format-jinja = """
-{%- if env.get("VERSION_TYPE") in ("version_branch", "feature_branch") -%}
+{%- if env.get("VERSION_TYPE") == "version_branch" -%}
 {{serialize_pep440(bump_version(base, 1 if env.get("IS_MASTER") == "TRUE" else 2), dev=distance)}}
 {%- elif distance == 0 -%}
 {{serialize_pep440(base)}}
