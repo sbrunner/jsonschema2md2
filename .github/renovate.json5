@@ -90,5 +90,10 @@
       matchUpdateTypes: ['major', 'minor', 'pin', 'digest', 'lockFileMaintenance', 'rollback', 'bump'],
       enabled: false,
     },
+    /** Auto merge the GitHub action and pre-commit updates */
+    {
+      matchDatasources: ['github-actions', 'pre-commit'],
+      automerge: true,
+    },
   ],
 }
