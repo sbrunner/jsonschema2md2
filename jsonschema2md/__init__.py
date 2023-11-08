@@ -293,7 +293,7 @@ class Parser:
             for obj_name, obj in schema_object["properties"].items():
                 output_lines.extend(self._parse_object(obj, obj_name))
 
-        # Add definitions
+        # Add definitions / $defs
         for name in ["definitions", "$defs"]:
             if name in schema_object:
                 output_lines.append("## Definitions\n\n")
