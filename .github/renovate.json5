@@ -12,7 +12,7 @@
     automerge: true,
     schedule: 'after 5pm on the first day of the month',
   },
-  baseBranches: ['master', '0.6', '0.7', '0.8'],
+  baseBranches: ['0.7', '0.8', '0.9', 'master'],
   osvVulnerabilityAlerts: true,
   vulnerabilityAlerts: {
     schedule: ['at any time'],
