@@ -14,9 +14,9 @@ jobs:
       fail-fast: false
       matrix:
         branch:
-          - '0.6'
           - '0.7'
           - '0.8'
+          - '0.9'
 
     steps:
       - uses: actions/checkout@v4
