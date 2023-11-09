@@ -19,6 +19,7 @@ import subprocess  # nosec
 import sys
 from collections.abc import Sequence
 from typing import Optional, Union
+from urllib.parse import quote
 
 import yaml
 
@@ -100,7 +101,7 @@ class Parser:
             else:
                 description_line.append("Cannot contain additional properties.")
         if "$ref" in obj:
-            description_line.append(f"Refer to *[{obj['$ref']}](#{obj['$ref'][2:]})*.")
+            description_line.append(f"Refer to *[{obj['$ref']}](#{quote(obj['$ref'][2:])})*.")
         if "default" in obj:
             description_line.append(f"Default: `{json.dumps(obj['default'])}`.")
 
@@ -190,7 +191,7 @@ class Parser:
             required_str = ", required" if required else ""
             obj_type = f" *({obj['type']}{optional_format}{required_str})*" if "type" in obj else ""
             name_formatted = f"**`{name}`**" if name_monospace else f"**{name}**"
-        anchor = f"<a id=\"{'/'.join(path)}\"></a>" if path else ""
+        anchor = f"<a id=\"{quote('/'.join(path))}\"></a>" if path else ""
         output_lines.append(f"{indentation}- {anchor}{name_formatted}{obj_type}{description_line}\n")
 
         # Recursively parse subschemas following schema composition keywords
@@ -212,7 +213,7 @@ class Parser:
                     )
 
         # Recursively add items and definitions
-        for property_name in ["items", "definitions"]:
+        for property_name in ["items", "definitions", "$defs"]:
             if property_name in obj:
                 output_lines = self._parse_object(
                     obj[property_name],
@@ -286,13 +287,18 @@ class Parser:
             for obj_name, obj in schema_object["patternProperties"].items():
                 output_lines.extend(self._parse_object(obj, obj_name))
 
-        # Add properties and definitions
-        for name in ["properties", "definitions"]:
+        # Add properties
+        if "properties" in schema_object:
+            output_lines.append("## Properties\n\n")
+            for obj_name, obj in schema_object["properties"].items():
+                output_lines.extend(self._parse_object(obj, obj_name))
+
+        # Add definitions / $defs
+        for name in ["definitions", "$defs"]:
             if name in schema_object:
-                output_lines.append(f"## {name.capitalize()}\n\n")
+                output_lines.append("## Definitions\n\n")
                 for obj_name, obj in schema_object[name].items():
-                    path = [name, obj_name] if name == "definitions" else []
-                    output_lines.extend(self._parse_object(obj, obj_name, path=path))
+                    output_lines.extend(self._parse_object(obj, obj_name, path=[name, obj_name]))
 
         # Add examples
         if "examples" in schema_object and self.show_examples in ["all", "object"]:

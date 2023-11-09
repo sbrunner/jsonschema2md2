@@ -4,6 +4,92 @@
 import jsonschema2md
 
 
+class TestDraft201909defs:
+    test_schema = {
+        "$id": "https://example.com/arrays.schema.json",
+        "$schema": "http://json-schema.org/draft/2019-09/schema",
+        "description": "Vegetable preferences",
+        "type": "object",
+        "additionalProperties": {
+            "description": "Additional info about foods you may like",
+            "type": "object",
+            "patternProperties": {
+                "^iLike(Meat|Drinks)$": {
+                    "type": "boolean",
+                    "description": "Do I like it?",
+                }
+            },
+        },
+        "properties": {
+            "fruits": {"type": "array", "items": {"type": "string"}},
+            "vegetables": {"type": "array", "items": {"$ref": "#/$defs/veggie"}},
+        },
+        "$defs": {
+            "veggie": {
+                "type": "object",
+                "required": ["veggieName", "veggieLike"],
+                "properties": {
+                    "veggieName": {
+                        "type": "string",
+                        "description": "The name of the vegetable.",
+                    },
+                    "veggieLike": {
+                        "type": "boolean",
+                        "description": "Do I like this vegetable?",
+                    },
+                    "expiresAt": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "When does the veggie expires",
+                    },
+                },
+            }
+        },
+        "examples": [
+            {
+                "fruits": ["apple", "orange"],
+                "vegetables": [{"veggieName": "cabbage", "veggieLike": True}],
+            }
+        ],
+    }
+
+    def test_parse_schema(self):
+        parser = jsonschema2md.Parser()
+        expected_output = [
+            "# JSON Schema\n\n",
+            "*Vegetable preferences*\n\n",
+            "## Additional Properties\n" "\n",
+            "- **Additional Properties** *(object)*: Additional info about foods you may " "like.\n",
+            "  - **`^iLike(Meat|Drinks)$`** *(boolean)*: Do I like it?\n",
+            "## Properties\n\n",
+            "- **`fruits`** *(array)*\n",
+            "  - **Items** *(string)*\n",
+            "- **`vegetables`** *(array)*\n",
+            "  - **Items**: Refer to *[#/$defs/veggie](#%24defs/veggie)*.\n",
+            "## Definitions\n\n",
+            '- <a id="%24defs/veggie"></a>**`veggie`** *(object)*\n',
+            "  - **`veggieName`** *(string, required)*: The name of the vegetable.\n",
+            "  - **`veggieLike`** *(boolean, required)*: Do I like this vegetable?\n",
+            "  - **`expiresAt`** *(string, format: date)*: When does the veggie expires.\n",
+            "## Examples\n\n",
+            "  ```json\n"
+            "  {\n"
+            '      "fruits": [\n'
+            '          "apple",\n'
+            '          "orange"\n'
+            "      ],\n"
+            '      "vegetables": [\n'
+            "          {\n"
+            '              "veggieName": "cabbage",\n'
+            '              "veggieLike": true\n'
+            "          }\n"
+            "      ]\n"
+            "  }\n"
+            "  ```\n\n",
+        ]
+        assert expected_output == parser.parse_schema(self.test_schema)
+
+
 class TestParser:
     test_schema = {
         "$id": "https://example.com/arrays.schema.json",
