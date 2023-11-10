@@ -6,3 +6,5 @@ pre-commit==3.5.0
 poetry-plugin-drop-python-upper-constraint==0.1.0
 poetry-plugin-tweak-dependencies-version==1.5.1
 poetry-dynamic-versioning==1.1.1
+certifi>=2023.7.22 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
