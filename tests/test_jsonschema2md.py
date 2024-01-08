@@ -20,6 +20,17 @@ class TestDraft201909defs:
                 }
             },
         },
+        "unevaluatedProperties": {
+            "description": "Anything else you want to add",
+            "type": "object",
+            "additionalProperties": False,
+            "patternProperties": {
+                "^extraInfo[\\w]*$": {
+                    "type": "string",
+                    "description": "Anything else I might like to say.",
+                }
+            },
+        },
         "properties": {
             "fruits": {"type": "array", "items": {"type": "string"}},
             "vegetables": {"type": "array", "items": {"$ref": "#/$defs/veggie"}},
@@ -61,6 +72,9 @@ class TestDraft201909defs:
             "## Additional Properties\n" "\n",
             "- **Additional Properties** *(object)*: Additional info about foods you may " "like.\n",
             "  - **`^iLike(Meat|Drinks)$`** *(boolean)*: Do I like it?\n",
+            "## Unevaluated Properties\n" "\n",
+            "- **Unevaluated Properties** *(object)*: Anything else you want to add. Cannot contain additional properties.\n",
+            "  - **`^extraInfo[\\w]*$`** *(string)*: Anything else I might like to say.\n",
             "## Properties\n\n",
             "- **`fruits`** *(array)*\n",
             "  - **Items** *(string)*\n",

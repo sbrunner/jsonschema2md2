@@ -95,11 +95,12 @@ class Parser:
             description_line.append(length_description)
         if "enum" in obj:
             description_line.append(f"Must be one of: `{json.dumps(obj['enum'])}`.")
-        if "additionalProperties" in obj:
-            if obj["additionalProperties"]:
-                description_line.append("Can contain additional properties.")
-            else:
-                description_line.append("Cannot contain additional properties.")
+        for extra_props in ["additional", "unevaluated"]:
+            if f"{extra_props}Properties" in obj:
+                if obj[f"{extra_props}Properties"]:
+                    description_line.append(f"Can contain {extra_props} properties.")
+                else:
+                    description_line.append(f"Cannot contain {extra_props} properties.")
         if "$ref" in obj:
             description_line.append(f"Refer to *[{obj['$ref']}](#{quote(obj['$ref'][2:])})*.")
         if "default" in obj:
@@ -224,14 +225,16 @@ class Parser:
                 )
 
         # Recursively add additional child properties
-        if "additionalProperties" in obj and isinstance(obj["additionalProperties"], dict):
-            output_lines = self._parse_object(
-                obj["additionalProperties"],
-                "Additional Properties",
-                name_monospace=False,
-                output_lines=output_lines,
-                indent_level=indent_level + 1,
-            )
+        for extra_props in ["additional", "unevaluated"]:
+            property_name = f"{extra_props}Properties"
+            if property_name in obj and isinstance(obj[property_name], dict):
+                output_lines = self._parse_object(
+                    obj[property_name],
+                    f"{extra_props.capitalize()} properties",
+                    name_monospace=False,
+                    output_lines=output_lines,
+                    indent_level=indent_level + 1,
+                )
 
         # Recursively add child properties
         for property_name in ["properties", "patternProperties"]:
@@ -268,18 +271,19 @@ class Parser:
             output_lines.append("## Items\n\n")
             output_lines.extend(self._parse_object(schema_object["items"], "Items", name_monospace=False))
 
-        # Add additional properties
-        if "additionalProperties" in schema_object and isinstance(
-            schema_object["additionalProperties"], dict
-        ):
-            output_lines.append("## Additional Properties\n\n")
-            output_lines.extend(
-                self._parse_object(
-                    schema_object["additionalProperties"],
-                    "Additional Properties",
-                    name_monospace=False,
+        # Add additional/unevaluated properties
+        for extra_props in ["additional", "unevaluated"]:
+            property_name = f"{extra_props}Properties"
+            title_ = f"{extra_props.capitalize()} Properties"
+            if property_name in schema_object and isinstance(schema_object[property_name], dict):
+                output_lines.append(f"## {title_}\n\n")
+                output_lines.extend(
+                    self._parse_object(
+                        schema_object[property_name],
+                        title_,
+                        name_monospace=False,
+                    )
                 )
-            )
 
         # Add pattern properties
         if "patternProperties" in schema_object:
