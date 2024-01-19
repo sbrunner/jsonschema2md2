@@ -17,7 +17,7 @@ jobs:
       - uses: actions/github-script@v7
         with:
           script: |-
-            runs = await github.rest.actions.listWorkflowRuns({
+            let runs = await github.rest.actions.listWorkflowRuns({
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: 'audit.yaml',
@@ -25,7 +25,9 @@ jobs:
               //event: 'schedule',
               //branch: 'master',
             });
-            console.log(runs)
+            runs = runs.data.workflow_runs;
+            console.log(runs[0])
+
             ////runs.filter(run => run.name == 'Audit')
             //console.log(runs)
         #env:
