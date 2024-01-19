@@ -24,6 +24,7 @@ jobs:
                 'X-GitHub-Api-Version': '2022-11-28'
               }
             });
+            console.log(runs)
             runs.filter(run => run.name == 'Audit')
             console.log(runs)
         #env:
