@@ -26,10 +26,15 @@ jobs:
               //branch: 'master',
             });
             runs = runs.data.workflow_runs;
-            console.log(runs[0])
-
-            ////runs.filter(run => run.name == 'Audit')
-            //console.log(runs)
+            //if (runs.length == 1 && runs[0].status != 'success') {
+            if (runs.length == 1) {
+              // reRunWorkflowFailedJobs
+              github.rest.actions.reRunWorkflow({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: runs[0].id,
+              });
+            }
         #env:
         #  GITHUB_TOKEN: ${{ secrets.TOKEN }}
         name: Test
