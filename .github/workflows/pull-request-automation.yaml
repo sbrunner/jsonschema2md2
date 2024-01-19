@@ -17,6 +17,7 @@ jobs:
       - uses: actions/github-script@v7
         with:
           script: |-
+            console.log(context);
             let runs = await github.rest.actions.listWorkflowRuns({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -28,6 +29,7 @@ jobs:
             runs = runs.data.workflow_runs;
             //if (runs.length == 1 && runs[0].status != 'success') {
             if (runs.length == 1) {
+              console.log(`Rerun worklow ${runs[0].id} ${runs[0].status}``);
               // reRunWorkflowFailedJobs
               github.rest.actions.reRunWorkflow({
                 owner: context.repo.owner,
