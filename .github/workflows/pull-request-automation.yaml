@@ -1,6 +1,7 @@
 name: Auto reviews, merge and close pull requests
 
 on:
+  push:
   pull_request:
     types:
       - opened
@@ -13,6 +14,23 @@ jobs:
     timeout-minutes: 5
 
     steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |-
+            runs = await octokit.request(`GET /repos/${context.repo.owner}/${context.repo.repo}/actions/runs`, {
+              event: 'schedule',
+              branch: 'master',
+              headers: {
+                'X-GitHub-Api-Version': '2022-11-28'
+              }
+            })
+            # filter on name = Audit
+            runs.filter(run => run.name == 'Audit')
+            console.log(runs)
+        #env:
+        #  GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        name: Test
+
       - uses: actions/github-script@v7
         with:
           script: |-
