@@ -14,7 +14,9 @@ jobs:
 
     steps:
       - name: Print event
-        run: echo ${{ toJson(github.event) }}
+        run: echo $GITHUB
+        env:
+          GITHUB: ${{ toJson(github) }}
       - name: Print context
         uses: actions/github-script@v7
         with:
