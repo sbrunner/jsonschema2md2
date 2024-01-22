@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Print event
-        run: echo $GITHUB
+        run: jq --color-output <<<  $GITHUB
         env:
           GITHUB: ${{ toJson(github) }}
       - name: Print context
