@@ -1,6 +1,7 @@
 name: Auto reviews, merge and close pull requests
 
 on:
+  push:
   pull_request:
     types:
       - opened
