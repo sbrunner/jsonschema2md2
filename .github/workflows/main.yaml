@@ -69,11 +69,10 @@ jobs:
           poetry run pytest tests -vv
 
       - name: Init pypi
-        run: |
+        run: |-
           echo "[pypi]" > ~/.pypirc
           echo "username = ${{ secrets.PYPI_USERNAME }}" >> ~/.pypirc
           echo "password = ${{ secrets.PYPI_PASSWORD }}" >> ~/.pypirc
-          python3 -m pip install --user wheel twine
         if: env.HAS_SECRETS == 'HAS_SECRETS'
       - name: Publish
         run: c2cciutils-publish
