@@ -1,6 +1,5 @@
 """Convert JSON Schema to Markdown documentation."""
 
-
 __author__ = "Stéphane Brunner"
 __email__ = "stephane.brunner@gmail.com"
 __license__ = "Apache-2.0"

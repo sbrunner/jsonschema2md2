@@ -1,6 +1,5 @@
 """Test jsonschema2md."""
 
-
 import jsonschema2md
 
 
