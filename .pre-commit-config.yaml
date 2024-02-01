@@ -59,7 +59,7 @@ repos:
       - id: trailing-whitespace
       - id: mixed-line-ending
   - repo: https://github.com/sbrunner/hooks
-    rev: 0.6.0
+    rev: 0.7.0
     hooks:
       - id: copyright
       - id: poetry-check
@@ -78,8 +78,8 @@ repos:
     hooks:
       - id: prettier
         additional_dependencies:
-          - prettier@3.1.1 # npm
-          - prettier-plugin-sh@0.13.1 # npm
+          - prettier@3.2.4 # npm
+          - prettier-plugin-sh@0.14.0 # npm
           - prettier-plugin-toml@2.0.1 # npm
           - '@prettier/plugin-xml@0.12.0' # npm
   - repo: https://github.com/shellcheck-py/shellcheck-py
@@ -91,7 +91,7 @@ repos:
     hooks:
       - id: git-check
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.27.3
+    rev: 0.27.4
     hooks:
       - id: check-github-actions
       - id: check-github-workflows
@@ -125,7 +125,7 @@ repos:
     hooks:
       - id: isort
   - repo: https://github.com/psf/black
-    rev: 23.12.1
+    rev: 24.1.1
     hooks:
       - id: black
   - repo: https://github.com/sbrunner/jsonschema-validator
