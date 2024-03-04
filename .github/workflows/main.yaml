@@ -13,11 +13,32 @@ env:
   HAS_SECRETS: ${{ secrets.HAS_SECRETS }}
 
 jobs:
-  main:
+  pre:
     name: Continuous integration
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     if: "!startsWith(github.event.head_commit.message, '[skip ci] ')"
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
+      - run: python3 -m pip install --user --requirement=ci/requirements.txt
+
+      - run: pip install --editable=.
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: "pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}\npre-commit-"
+      - run: pre-commit run --all-files
+        env:
+          SKIP: poetry-lock
+      - run: git diff && false
+        if: failure()
+  main:
+    name: Continuous integration
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    needs: pre
 
     strategy:
       fail-fast: false
@@ -35,28 +56,9 @@ jobs:
 
       - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
       - run: python3 -m pip install --user --requirement=ci/requirements.txt
-        if: matrix.python-version != '3.7'
-      - run: pip install poetry
-        if: matrix.python-version == '3.7'
-
-      - run: pip install --editable=.
-        if: matrix.python-version != '3.7'
-      - uses: actions/cache@v3
-        with:
-          path: ~/.cache/pre-commit
-          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
-          restore-keys: "pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}\npre-commit-"
-        if: matrix.python-version != '3.7'
-      - run: pre-commit run --all-files
-        env:
-          SKIP: poetry-lock
-        if: matrix.python-version != '3.7'
-      - run: git diff && false
-        if: failure()
 
       - name: Print environment information
         run: c2cciutils-env
-        if: matrix.python-version != '3.7'
 
       - name: Install with Poetry
         run: poetry install
@@ -69,6 +71,16 @@ jobs:
         run: |
           poetry run pytest tests -vv
 
+  publish:
+    name: Publish
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    needs: main
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
+      - run: python3 -m pip install --user --requirement=ci/requirements.txt
+
       - name: Init pypi
         run: |-
           echo "[pypi]" > ~/.pypirc
@@ -80,7 +92,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        if: env.HAS_SECRETS == 'HAS_SECRETS' && matrix.python-version == '3.9'
+        if: env.HAS_SECRETS == 'HAS_SECRETS'
       - run: |
           sed --in-place 's/jsonschema2md/jsonschema2md2/g' pyproject.toml
           sed --in-place 's@sbrunner/jsonschema2md2@sbrunner/jsonschema2md@g' pyproject.toml
@@ -92,4 +104,4 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        if: env.HAS_SECRETS == 'HAS_SECRETS' && matrix.python-version == '3.9'
+        if: env.HAS_SECRETS == 'HAS_SECRETS'
