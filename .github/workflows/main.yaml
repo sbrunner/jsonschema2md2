@@ -13,6 +13,25 @@ env:
   HAS_SECRETS: ${{ secrets.HAS_SECRETS }}
 
 jobs:
+  pre-commit:
+    name: Pre-commit
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    if: "!startsWith(github.event.head_commit.message, '[skip ci] ')"
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: "pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}\npre-commit-"
+      - run: pre-commit run --all-files
+        env:
+          SKIP: poetry-lock
+      - run: git diff && false
+        if: failure()
+
   main:
     name: Continuous integration
     runs-on: ubuntu-22.04
@@ -33,30 +52,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
-      - run: python3 -m pip install --user --requirement=ci/requirements.txt
-        if: matrix.python-version != '3.7'
-      - run: pip install poetry
-        if: matrix.python-version == '3.7'
-
       - run: pip install --editable=.
-        if: matrix.python-version != '3.7'
-      - uses: actions/cache@v4
-        with:
-          path: ~/.cache/pre-commit
-          key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
-          restore-keys: "pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}\npre-commit-"
-        if: matrix.python-version != '3.7'
-      - run: pre-commit run --all-files
-        env:
-          SKIP: poetry-lock
-        if: matrix.python-version != '3.7'
-      - run: git diff && false
-        if: failure()
-
-      - name: Print environment information
-        run: c2cciutils-env
-        if: matrix.python-version != '3.7'
 
       - name: Install with Poetry
         run: poetry install
@@ -68,6 +64,21 @@ jobs:
       - name: Test with pytest
         run: |
           poetry run pytest tests -vv
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    if: "!startsWith(github.event.head_commit.message, '[skip ci] ')"
+    needs:
+      - pre-commit
+      - main
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
+      - run: python3 -m pip install --user --requirement=ci/requirements.txt
 
       - name: Init pypi
         run: |-
