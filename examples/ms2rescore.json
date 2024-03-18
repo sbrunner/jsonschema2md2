@@ -68,6 +68,11 @@
           "description": "Logging level",
           "type": "string",
           "enum": ["debug", "info", "warning", "error", "critical"]
+        },
+        "const": {
+          "description": "Const attribute",
+          "type": "string",
+          "const": "value"
         }
       }
     },
