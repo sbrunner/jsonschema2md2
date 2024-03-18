@@ -94,6 +94,8 @@ class Parser:
             description_line.append(length_description)
         if "enum" in obj:
             description_line.append(f"Must be one of: `{json.dumps(obj['enum'])}`.")
+        if "const" in obj:
+            description_line.append(f"Must be: `{json.dumps(obj['const'])}`.")
         for extra_props in ["additional", "unevaluated"]:
             if f"{extra_props}Properties" in obj:
                 if obj[f"{extra_props}Properties"]:
