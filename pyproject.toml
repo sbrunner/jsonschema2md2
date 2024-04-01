@@ -34,9 +34,9 @@ PyYAML = "6.0.1"
 
 [tool.poetry.group.dev.dependencies]
 prospector = { version = "1.10.3", extras = ["with_bandit", "with_mypy", "with_pyroma"] }
-pytest = "8.0.2"
+pytest = "8.1.1"
 pytest-cov = "4.1.0"
-prospector-profile-duplicated = "1.1.0"
+prospector-profile-duplicated = "1.2.0"
 
 [build-system]
 requires = [
