@@ -119,7 +119,7 @@ class Parser:
             return "".join(result)
 
         def dump_yaml_with_line_head(obj, line_head, **kwargs):
-            result = [line_head + line for line in io.StringIO(yaml.dump(obj, **kwargs)).readlines()]
+            result = [line_head + line for line in io.StringIO(yaml.dump(obj, sort_keys=False, **kwargs)).readlines()]
             return "".join(result).rstrip()
 
         example_lines = []
