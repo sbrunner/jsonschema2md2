@@ -343,7 +343,7 @@ class TestParser:
             "  - **`veggieLike`** *(boolean, required)*: Do I like this vegetable?\n",
             "  - **`expiresAt`** *(string, format: date)*: When does the veggie expires.\n",
             "## Examples\n\n",
-            "  ```yaml\n  fruits:\n  - apple\n  - orange\n  vegetables:\n  -   veggieLike: true\n      veggieName: cabbage\n  ```\n\n",
+            "  ```yaml\n  fruits:\n  - apple\n  - orange\n  vegetables:\n  -   veggieName: cabbage\n      veggieLike: true\n  ```\n\n",
         ]
         assert expected_output == parser.parse_schema(self.test_schema)
 
