@@ -65,15 +65,15 @@
     },
     /** Group Poetry packages */
     {
-      matchPackageNames: ['poetry', 'pip'],
       matchPackagePrefixes: ['poetry-'],
       groupName: 'Poetry',
       automerge: true,
+      matchDepNames: ['poetry', 'pip'],
     },
     /** Support the 4 parts of shellcheck-py version with a v prefix */
     {
-      matchPackageNames: ['shellcheck-py/shellcheck-py'],
       versioning: 'regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)$',
+      matchDepNames: ['shellcheck-py/shellcheck-py'],
     },
     /** Accept only the patch on stabilization branches */
     {
