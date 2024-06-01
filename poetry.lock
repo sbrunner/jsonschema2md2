@@ -696,13 +696,13 @@ with-vulture = ["vulture (>=1.5)"]
 
 [[package]]
 name = "prospector-profile-duplicated"
-version = "1.2.0"
+version = "1.5.0"
 description = "Profile that can be used to disable the duplicated or conflict rules between Prospector and other tools"
 optional = false
 python-versions = "*"
 files = [
-    {file = "prospector_profile_duplicated-1.2.0-py2.py3-none-any.whl", hash = "sha256:48d7e2376788c82597f8e17707a402e4885f116f67145674120b784d3ea11d42"},
-    {file = "prospector_profile_duplicated-1.2.0.tar.gz", hash = "sha256:15465da9d5b07035693374a6bb12159d0993ef85948e94f958f5632861f577f5"},
+    {file = "prospector_profile_duplicated-1.5.0-py2.py3-none-any.whl", hash = "sha256:fd4d3272ff6b5ceead036f4a60da6dd7aa5317057f66c735994b75542c9a0815"},
+    {file = "prospector_profile_duplicated-1.5.0.tar.gz", hash = "sha256:c1d6074ebb44fd3ea6a7b85e96d58a27f6e525687b019ef94924a9c8d2ccd5d5"},
 ]
 
 [[package]]
@@ -884,13 +884,13 @@ test = ["setuptools (>=60)", "zest.releaser[recommended]"]
 
 [[package]]
 name = "pytest"
-version = "8.1.2"
+version = "8.2.1"
 description = "pytest: simple powerful testing with Python"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pytest-8.1.2-py3-none-any.whl", hash = "sha256:6c06dc309ff46a05721e6fd48e492a775ed8165d2ecdf57f156a80c7e95bb142"},
-    {file = "pytest-8.1.2.tar.gz", hash = "sha256:f3c45d1d5eed96b01a2aea70dee6a4a366d51d38f9957768083e4fecfc77f3ef"},
+    {file = "pytest-8.2.1-py3-none-any.whl", hash = "sha256:faccc5d332b8c3719f40283d0d44aa5cf101cec36f88cde9ed8f2bc0538612b1"},
+    {file = "pytest-8.2.1.tar.gz", hash = "sha256:5046e5b46d8e4cac199c373041f26be56fdb81eb4e67dc11d4e10811fc3408fd"},
 ]
 
 [package.dependencies]
@@ -898,11 +898,11 @@ colorama = {version = "*", markers = "sys_platform == \"win32\""}
 exceptiongroup = {version = ">=1.0.0rc8", markers = "python_version < \"3.11\""}
 iniconfig = "*"
 packaging = "*"
-pluggy = ">=1.4,<2.0"
+pluggy = ">=1.5,<2.0"
 tomli = {version = ">=1", markers = "python_version < \"3.11\""}
 
 [package.extras]
-testing = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "pygments (>=2.7.2)", "requests", "setuptools", "xmlschema"]
+dev = ["argcomplete", "attrs (>=19.2)", "hypothesis (>=3.56)", "mock", "pygments (>=2.7.2)", "requests", "setuptools", "xmlschema"]
 
 [[package]]
 name = "pytest-cov"
@@ -1283,4 +1283,4 @@ test = ["big-O", "jaraco.functools", "jaraco.itertools", "jaraco.test", "more-it
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<4.0"
-content-hash = "97f0d7e324c0cb82e5a526f0e98b617885e792195b93b4da0b8c6b76283c4baa"
+content-hash = "2c733c321c3359f57b5ec80f50807060a6951bea31523b529276f7e98713d03c"
