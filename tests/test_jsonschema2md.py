@@ -34,6 +34,7 @@ class TestDraft201909defs:
             "fruits": {"type": "array", "items": {"type": "string"}},
             "vegetables": {"type": "array", "items": {"$ref": "#/$defs/veggie"}},
         },
+        "required": ["fruits"],
         "$defs": {
             "veggie": {
                 "type": "object",
@@ -75,7 +76,7 @@ class TestDraft201909defs:
             "- **Unevaluated Properties** *(object)*: Anything else you want to add. Cannot contain additional properties.\n",
             "  - **`^extraInfo[\\w]*$`** *(string)*: Anything else I might like to say.\n",
             "## Properties\n\n",
-            "- **`fruits`** *(array)*\n",
+            "- **`fruits`** *(array, required)*\n",
             "  - **Items** *(string)*\n",
             "- **`vegetables`** *(array)*\n",
             "  - **Items**: Refer to *[#/$defs/veggie](#%24defs/veggie)*.\n",
