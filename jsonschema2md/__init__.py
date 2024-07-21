@@ -19,7 +19,6 @@ import sys
 from collections.abc import Sequence
 from typing import Optional, Union
 from urllib.parse import quote
-
 import yaml
 
 __version__ = version("jsonschema2md")
@@ -261,7 +260,6 @@ class Parser:
     def parse_schema(self, schema_object: dict) -> Sequence[str]:
         """Parse JSON Schema object to markdown text."""
         output_lines = []
-
         # Add title and description
         if "title" in schema_object:
             output_lines.append(f"# {schema_object['title']}\n\n")
@@ -288,7 +286,7 @@ class Parser:
                         name_monospace=False,
                     )
                 )
-
+        
         # Add pattern properties
         if "patternProperties" in schema_object:
             output_lines.append("## Pattern Properties\n\n")
@@ -299,7 +297,11 @@ class Parser:
         if "properties" in schema_object:
             output_lines.append("## Properties\n\n")
             for obj_name, obj in schema_object["properties"].items():
-                output_lines.extend(self._parse_object(obj, obj_name))
+                required = False
+                if "required" in schema_object:
+                    if obj_name in schema_object["required"]:
+                        required = True
+                output_lines.extend(self._parse_object(obj, obj_name, required=required))
 
         # Add definitions / $defs
         for name in ["definitions", "$defs"]:
