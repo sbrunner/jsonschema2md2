@@ -34,7 +34,7 @@ class TestDraft201909defs:
             "fruits": {"type": "array", "items": {"type": "string"}},
             "vegetables": {"type": "array", "items": {"$ref": "#/$defs/veggie"}},
         },
-        "required": ["fruits"], 
+        "required": ["fruits"],
         "$defs": {
             "veggie": {
                 "type": "object",

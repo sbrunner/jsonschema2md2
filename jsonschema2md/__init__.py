@@ -261,7 +261,7 @@ class Parser:
     def parse_schema(self, schema_object: dict) -> Sequence[str]:
         """Parse JSON Schema object to markdown text."""
         output_lines = []
-        
+
         # Add title and description
         if "title" in schema_object:
             output_lines.append(f"# {schema_object['title']}\n\n")
@@ -288,7 +288,7 @@ class Parser:
                         name_monospace=False,
                     )
                 )
-        
+
         # Add pattern properties
         if "patternProperties" in schema_object:
             output_lines.append("## Pattern Properties\n\n")
