@@ -299,10 +299,7 @@ class Parser:
         if "properties" in schema_object:
             output_lines.append("## Properties\n\n")
             for obj_name, obj in schema_object["properties"].items():
-                required = False
-                if "required" in schema_object:
-                    if obj_name in schema_object["required"]:
-                        required = True
+                required = obj_name in schema_object.get("required", [])
                 output_lines.extend(self._parse_object(obj, obj_name, required=required))
 
         # Add definitions / $defs
