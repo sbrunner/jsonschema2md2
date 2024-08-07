@@ -102,7 +102,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        if: env.HAS_SECRETS == 'HAS_SECRETS' && matrix.python-version == '3.9'
+        if: env.HAS_SECRETS == 'HAS_SECRETS'
       - run: |
           sed --in-place 's/jsonschema2md/jsonschema2md2/g' pyproject.toml
           sed --in-place 's@sbrunner/jsonschema2md2@sbrunner/jsonschema2md@g' pyproject.toml
@@ -114,4 +114,4 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        if: env.HAS_SECRETS == 'HAS_SECRETS' && matrix.python-version == '3.9'
+        if: env.HAS_SECRETS == 'HAS_SECRETS'
