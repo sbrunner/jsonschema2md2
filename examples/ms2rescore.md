@@ -32,7 +32,7 @@ _MS²ReScore JSON configuration file._
       - _string_
       - _null_
   - **`log_level`** _(string)_: Logging level. Must be one of: `["debug", "info", "warning", "error", "critical"]`.
-  - **`const`** _(string)_: Const attribute.
+  - **`const`** _(string)_: Const attribute. Must be: `"value"`.
 - **`ms2pip`** _(object)_: MS²PIP settings. Cannot contain additional properties.
   - **`model`** _(string)_: MS²PIP model to use (see MS²PIP documentation). Default: `"HCD"`.
   - **`frag_error`** _(number)_: MS2 error tolerance in Da. Minimum: `0`. Default: `0.02`.
