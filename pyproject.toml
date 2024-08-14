@@ -38,7 +38,7 @@ prospector = { version = "1.9.0", extras = ["with_bandit", "with_mypy", "with_py
 pytest = "6.2.5"
 pytest-cov = "4.0.0"
 pydocstyle = "5.1.1"
-zipp = "3.19.1"
+zipp = { version = "3.19.1", optional = true }
 
 [build-system]
 requires = [
