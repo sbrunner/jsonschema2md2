@@ -35,7 +35,6 @@
   packageRules: [
     /** Automerge the patch, the minor and the dev dependency */
     {
-      matchBaseBranches: ['master'],
       matchUpdateTypes: ['minor', 'patch'],
       automerge: true,
     },
