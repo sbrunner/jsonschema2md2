@@ -12,7 +12,6 @@
     automerge: true,
     schedule: 'after 5pm on the first day of the month',
   },
-  baseBranches: ['0.7', '0.8', '0.9', 'master'],
   vulnerabilityAlerts: {
     schedule: ['at any time'],
     automerge: true,
