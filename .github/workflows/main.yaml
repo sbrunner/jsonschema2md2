@@ -59,12 +59,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - run: python3 -m pip install --requirement=ci/requirements.txt
-
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+
+      - run: python3 -m pip install --requirement=ci/requirements.txt
 
       - name: Install with Poetry
         run: poetry install
