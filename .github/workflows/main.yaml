@@ -22,8 +22,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
-      - run: python3 -m pip install --user --requirement=ci/requirements.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python3 -m pip install --requirement=ci/requirements.txt
       - run: pip install --editable=.
 
       - uses: actions/cache@v4
@@ -58,8 +60,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
-      - run: python3 -m pip install --user --requirement=ci/requirements.txt
+      - run: python3 -m pip install --requirement=ci/requirements.txt
 
       - uses: actions/setup-python@v5
         with:
@@ -88,8 +89,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: echo "${HOME}/.local/bin" >> ${GITHUB_PATH}
-      - run: python3 -m pip install --user --requirement=ci/requirements.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python3 -m pip install --requirement=ci/requirements.txt
 
       - name: Init pypi
         run: |-
