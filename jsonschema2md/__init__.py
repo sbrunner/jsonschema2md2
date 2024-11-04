@@ -152,7 +152,7 @@ class Parser:
         indent_level: int = 0,
         path: Optional[list[str]] = None,
         required: bool = False,
-    ) -> Sequence[str]:
+    ) -> list[str]:
         """Parse JSON object and its items, definitions, and properties recursively."""
 
         if not output_lines:
@@ -179,7 +179,7 @@ class Parser:
 
         # Construct full description line
         description_line_base = self._construct_description_line(obj)
-        description_line = list(
+        description_line_list = list(
             map(
                 lambda line: line.replace("\n\n", "<br>" + indentation_items),
                 description_line_base,
@@ -187,7 +187,7 @@ class Parser:
         )
 
         # Add full line to output
-        description_line = " ".join(description_line)
+        description_line = " ".join(description_line_list)
         optional_format = f", format: {obj['format']}" if "format" in obj else ""
         if name is None:
             obj_type = f"*{obj['type']}{optional_format}*" if "type" in obj else ""
