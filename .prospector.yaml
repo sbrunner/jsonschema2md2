@@ -1,33 +1,4 @@
 inherits:
+  - utils:base
+  - utils:no-design-checks
   - duplicated
-
-strictness: veryhigh
-max-line-length: 110
-
-pylint:
-  disable:
-    - too-many-branches
-    - too-many-arguments
-    - too-many-locals
-    - too-few-public-methods
-
-pycodestyle:
-  options:
-    max-line-length: 110
-
-mypy:
-  run: true
-  options:
-    python-version: 3.8
-    ignore-missing-imports: true
-    warn:
-      - redundant-casts
-      - unused-ignores
-    check:
-      - untyped-defs
-
-bandit:
-  run: true
-
-mccabe:
-  run: false
