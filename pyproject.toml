@@ -37,7 +37,7 @@ prospector = { version = "1.13.3", extras = ["with_bandit", "with_mypy", "with_p
 prospector-profile-duplicated = "1.8.0"
 prospector-profile-utils = "1.12.2"
 types-PyYAML = "6.0.12.20240917"
-pytest = "8.3.3"
+pytest = "8.3.4"
 pytest-cov = "6.0.0"
 
 [build-system]
