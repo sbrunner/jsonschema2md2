@@ -40,7 +40,7 @@ class Parser:
 
     def __init__(self, examples_as_yaml: bool = False, show_examples: str = "all"):
         """
-        Setup JSON Schema to Markdown parser.
+        Initialize JSON Schema to Markdown parser.
 
         Parameters
         ----------
@@ -241,13 +241,13 @@ class Parser:
         # Recursively add child properties
         for property_name in ["properties", "patternProperties"]:
             if property_name in obj:
-                for property_name, property_obj in obj[property_name].items():
+                for obj_property_name, property_obj in obj[property_name].items():
                     output_lines = self._parse_object(
                         property_obj,
-                        property_name,
+                        obj_property_name,
                         output_lines=output_lines,
                         indent_level=indent_level + 1,
-                        required=property_name in obj.get("required", []),
+                        required=obj_property_name in obj.get("required", []),
                     )
 
         # Add examples
