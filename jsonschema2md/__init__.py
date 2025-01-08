@@ -17,7 +17,7 @@ import re
 import subprocess  # nosec
 import sys
 from collections.abc import Sequence
-from typing import Optional, Union
+from typing import Any, Optional, Union
 from urllib.parse import quote
 
 import yaml
@@ -38,7 +38,7 @@ class Parser:
 
     tab_size = 2
 
-    def __init__(self, examples_as_yaml: bool = False, show_examples: str = "all"):
+    def __init__(self, examples_as_yaml: bool = False, show_examples: str = "all") -> None:
         """
         Initialize JSON Schema to Markdown parser.
 
@@ -63,7 +63,7 @@ class Parser:
                 f"`{valid_show_examples_options}`; `{show_examples}` was passed."
             )
 
-    def _construct_description_line(self, obj: dict, add_type: bool = False) -> Sequence[str]:
+    def _construct_description_line(self, obj: dict[str, Any], add_type: bool = False) -> Sequence[str]:
         """Construct description line of property, definition, or item."""
         description_line = []
 
@@ -112,12 +112,14 @@ class Parser:
 
         return description_line
 
-    def _construct_examples(self, obj: dict, indent_level: int = 0, add_header: bool = True) -> Sequence[str]:
-        def dump_json_with_line_head(obj, line_head, **kwargs):
+    def _construct_examples(
+        self, obj: dict[str, Any], indent_level: int = 0, add_header: bool = True
+    ) -> Sequence[str]:
+        def dump_json_with_line_head(obj: dict[str, Any], line_head: str, **kwargs: Any) -> str:
             result = [line_head + line for line in io.StringIO(json.dumps(obj, **kwargs)).readlines()]
             return "".join(result)
 
-        def dump_yaml_with_line_head(obj, line_head, **kwargs):
+        def dump_yaml_with_line_head(obj: dict[str, Any], line_head: str, **kwargs: Any) -> str:
             result = [
                 line_head + line
                 for line in io.StringIO(yaml.dump(obj, sort_keys=False, **kwargs)).readlines()
@@ -144,7 +146,7 @@ class Parser:
 
     def _parse_object(
         self,
-        obj: Union[dict, list],
+        obj: Union[dict[str, Any], list[Any]],
         name: Optional[str],
         name_monospace: bool = True,
         output_lines: Optional[list[str]] = None,
@@ -256,7 +258,7 @@ class Parser:
 
         return output_lines
 
-    def parse_schema(self, schema_object: dict) -> Sequence[str]:
+    def parse_schema(self, schema_object: dict[str, Any]) -> Sequence[str]:
         """Parse JSON Schema object to markdown text."""
         output_lines = []
 
@@ -315,7 +317,7 @@ class Parser:
         return output_lines
 
 
-def main():
+def main() -> None:
     """Convert JSON Schema to Markdown documentation."""
     argparser = argparse.ArgumentParser("Convert JSON Schema to Markdown documentation.")
     argparser.add_argument("--version", action="store_true", help="Show version and exit.")
