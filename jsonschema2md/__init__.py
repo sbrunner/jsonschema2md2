@@ -70,9 +70,8 @@ class Parser:
         if "description" in obj:
             ending = "" if re.search(r"[.?!;]$", obj["description"]) else "."
             description_line.append(f"{obj['description']}{ending}")
-        if add_type:
-            if "type" in obj:
-                description_line.append(f"Must be of type *{obj['type']}*.")
+        if add_type and "type" in obj:
+            description_line.append(f"Must be of type *{obj['type']}*.")
         if "minimum" in obj:
             description_line.append(f"Minimum: `{obj['minimum']}`.")
         if "exclusiveMinimum" in obj:
@@ -154,7 +153,6 @@ class Parser:
         required: bool = False,
     ) -> list[str]:
         """Parse JSON object and its items, definitions, and properties recursively."""
-
         if not output_lines:
             output_lines = []
 
@@ -319,7 +317,6 @@ class Parser:
 
 def main():
     """Convert JSON Schema to Markdown documentation."""
-
     argparser = argparse.ArgumentParser("Convert JSON Schema to Markdown documentation.")
     argparser.add_argument("--version", action="store_true", help="Show version and exit.")
     argparser.add_argument(
