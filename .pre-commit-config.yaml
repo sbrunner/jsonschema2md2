@@ -103,11 +103,11 @@ repos:
     hooks:
       - id: renovate-config-validator
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.8.1
+    rev: v0.8.6
     hooks:
       - id: ruff-format
   - repo: https://github.com/PyCQA/prospector
-    rev: v1.13.0
+    rev: v1.13.3
     hooks:
       - id: prospector
         args:
@@ -117,7 +117,7 @@ repos:
         additional_dependencies:
           - prospector-profile-duplicated==1.9.0 # pypi
           - prospector-profile-utils==1.14.1 # pypi
-          - ruff==0.7.3 # pypi
+          - ruff==0.7.4 # pypi
   - repo: https://github.com/sbrunner/python-versions-hook
     rev: 0.8.0
     hooks:
